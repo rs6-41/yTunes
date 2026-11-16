@@ -1,0 +1,45 @@
+# 一般
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Icon must end with two \r
+Icon
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+*.swp
+
+UserInterfaceState.xcuserstate
+
+# Xcode ユーザー固有の設定（ブレークポイント、スキーム表示状態など）
+xcuserdata/
+DerivedData/
+*.xcresult
+
+# Python スクリプトの実行時キャッシュ
+__pycache__/
+*.py[cod]
+
+env.swift
+node_modules/
+
+# Xcode Cloud が生成するTestFlightのテスト内容
+iOS/TransitICScanner/TestFlight/
