@@ -34,7 +34,7 @@ nonisolated struct DownloadSettings: Codable, Equatable, Sendable {
     }
 
     var media: Media = .video
-    var videoFormat: VideoFormat = .automatic
+    var videoFormat: VideoFormat = .mp4
     var audioFormat: AudioFormat = .mp3
     var resolution: Resolution = .best
     var filename: Filename = .title
