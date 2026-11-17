@@ -45,7 +45,7 @@ enum ToolSetup {
             try await installHomebrew()
 
             guard let installed = findBrew() else {
-                throw SetupError.failed("Homebrewの導入を確認できませんでした。")
+                throw SetupError.failed(String(localized: "Homebrewの導入を確認できませんでした。"))
             }
 
             brew = installed
@@ -135,7 +135,7 @@ enum ToolSetup {
         guard let asset = release.assets.first(where: {
             $0.name.hasPrefix("Homebrew-") && $0.name.hasSuffix(".pkg")
         }) else {
-            throw SetupError.failed("公式インストーラーが見つかりませんでした。")
+            throw SetupError.failed(String(localized: "公式インストーラーが見つかりませんでした。"))
         }
 
         let (download, downloadResponse) = try await URLSession.shared.download(
@@ -174,7 +174,7 @@ enum ToolSetup {
         )
         #else
         throw SetupError.failed(
-            "Intel Macでは手動でHomeBrewを導入する必要があります。"
+            String(localized: "Intel Macでは手動でHomeBrewを導入する必要があります。")
         )
         #endif
     }
@@ -182,7 +182,7 @@ enum ToolSetup {
     private static func validate(_ response: URLResponse) throws {
         guard let http = response as? HTTPURLResponse,
               (200..<300).contains(http.statusCode) else {
-            throw SetupError.failed("ダウンロードに失敗しました。")
+            throw SetupError.failed(String(localized: "ダウンロードに失敗しました。"))
         }
     }
 
@@ -206,7 +206,7 @@ enum ToolSetup {
 
         guard result.status == 0 else {
             throw SetupError.failed(
-                "\(executable.lastPathComponent)の実行に失敗しました。\n\(result.output)"
+                String(localized: "\(executable.lastPathComponent)の実行に失敗しました。\n\(result.output)")
             )
         }
 

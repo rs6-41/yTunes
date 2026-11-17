@@ -1,17 +1,14 @@
-//
-//  yTunesApp.swift
-//  yTunes
-//
-//  Created by 颯毅 on 2026/11/16.
-//
-
 import SwiftUI
 
 @main
 struct yTunesApp: App {
+    @StateObject private var model = DownloadModel()
+
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(model)
+                .onOpenURL { model.receive($0) }
         }
     }
 }
