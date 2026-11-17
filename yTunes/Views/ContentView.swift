@@ -4,7 +4,6 @@ import UniformTypeIdentifiers
 
 struct ContentView: View {
     @EnvironmentObject private var model: DownloadModel
-    @State private var isImporterPresented = false
 
     var body: some View {
         VStack(alignment: .leading, spacing: 16) {
@@ -17,16 +16,10 @@ struct ContentView: View {
                     }
                 }
             }
-            HStack {
-                Button("フォルダを選択") {
-                    isImporterPresented = true
-                }
-                Text(model.selectedURL?.path ?? String(localized: "保存先未設定"))
-                    .lineLimit(2)
-            }
             TextField("URLを入力", text: $model.downloadURL)
                 .textFieldStyle(.roundedBorder)
                 .autocorrectionDisabled(true)
+            DownloadOptionsForm(settings: $model.settings, onFolderSelected: model.selectFolder)
             Button("ダウンロード開始") {
                 model.enqueue(model.downloadURL)
             }
@@ -55,13 +48,5 @@ struct ContentView: View {
         .padding()
         .frame(minWidth: 480, minHeight: 220)
         .task { await model.prepare() }
-        .fileImporter(isPresented: $isImporterPresented, allowedContentTypes: [.folder]) { result in
-            switch result {
-            case .success(let url):
-                model.selectFolder(url)
-            case .failure(let error):
-                model.status = error.localizedDescription
-            }
-        }
     }
 }

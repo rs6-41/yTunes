@@ -12,6 +12,9 @@
     ],
   },
   "files": [
+    { "path": "README.md", "type": "net.daringfireball.markdown" },
+    { "kind": "folder", "path": "doc" },
+    { "kind": "folder", "path": "Shared", "target-membership": [ "extension", "yTunes" ] },
     {
       "kind": "folder",
       "path": "yTunes",

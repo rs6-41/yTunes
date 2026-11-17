@@ -1,38 +1,9 @@
 import AppKit
 import Combine
 import SafariServices
-import SwiftUI
-
-final class SafariPopoverViewController: SFSafariExtensionViewController {
-    static let shared = SafariPopoverViewController()
-    private let model = SafariPopoverModel()
-
-    private init() {
-        super.init(nibName: nil, bundle: nil)
-        preferredContentSize = NSSize(width: 340, height: 240)
-    }
-
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-    }
-
-    override func loadView() {
-        let hostingView = NSHostingView(rootView: SafariPopoverView(model: model))
-        hostingView.frame = NSRect(x: 0, y: 0, width: 340, height: 240)
-        view = hostingView
-        preferredContentSize = NSSize(width: 340, height: 240)
-    }
-
-    func loadPage(in window: SFSafariWindow) {
-        model.loadPage(in: window)
-    }
-
-    func clearPage() {
-        model.clearPage()
-    }
-}
 
 final class SafariPopoverModel: ObservableObject {
+    @Published var settings = DownloadSettings()
     @Published private(set) var pageURL: URL?
     @Published private(set) var status = String(localized: "ページのURLを取得しています…")
     @Published private(set) var isLoading = true
@@ -86,11 +57,9 @@ final class SafariPopoverModel: ObservableObject {
 
     func download() {
         guard let pageURL else { return }
-        var components = URLComponents()
-        components.scheme = "ytunes"
-        components.host = "download"
-        components.queryItems = [URLQueryItem(name: "url", value: pageURL.absoluteString)]
-        guard let url = components.url else { return }
+        let url: URL
+        do { url = try DownloadLink.make(pageURL: pageURL, settings: settings, destinationURL: DownloadFolderStore.restore()) }
+        catch { status = error.localizedDescription; return }
         if NSWorkspace.shared.open(url) {
             status = String(localized: "yTunesへ送信しました。")
         } else {
