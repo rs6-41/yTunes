@@ -5,18 +5,47 @@
     "Release",
   ],
   "localizations": {
-    "development": "en",
+    "development": "ja",
     "supported": [
       "Base",
+      "en",
     ],
   },
   "files": [
-    { "kind": "folder", "path": "yTunes", "target-membership": [ "yTunes" ] },
     {
+      "kind": "folder",
+      "path": "yTunes",
+      "target-membership": [
+        "yTunes",
+      ],
+      "membership-exceptions": [
+        {
+          "target": "yTunes",
+          "exclusions": [
+            "Info.plist",
+          ],
+        },
+      ],
+    }, {
+      "kind": "folder",
+      "path": "extension",
+      "target-membership": [
+        "extension",
+      ],
+      "membership-exceptions": [
+        {
+          "target": "extension",
+          "exclusions": [
+            "Info.plist",
+          ],
+        },
+      ],
+    }, {
       "kind": "group",
       "name": "Products",
       "children": [
         { "path": "<PRODUCTS>/yTunes.app", "id": "AA48E01330AA964E00344EA5", "type": "wrapper.application", "index": false },
+        { "path": "<PRODUCTS>/extension.appex", "id": "AA48E02D30AC27DC00344EA5", "type": "wrapper.app-extension", "index": false, "target-membership": [ { "build-phase": "yTunes/copy/Embed Foundation Extensions", "header-preservation": "remove-on-copy" } ] },
       ],
     },
   ],
@@ -26,15 +55,24 @@
       "id": "AA48E01230AA964E00344EA5",
       "product": "Products/yTunes.app",
       "product-type": "application",
+      "dependencies": [
+        "extension",
+      ],
       "build-phases": [
         "compile-sources",
         "frameworks",
         "resources",
+        {
+          "kind": "copy",
+          "name": "Embed Foundation Extensions",
+          "bundle-base-path": "plugins-directory",
+        },
       ],
       "build-settings": {
         "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
         "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": "AccentColor",
         "AUTOMATION_APPLE_EVENTS": "NO",
+        "CODE_SIGN_ENTITLEMENTS": "yTunes/yTunes.entitlements",
         "CODE_SIGN_STYLE": "Automatic",
         "COMBINE_HIDPI_IMAGES": "YES",
         "CURRENT_PROJECT_VERSION": "1",
@@ -49,6 +87,7 @@
         "ENABLE_RESOURCE_ACCESS_LOCATION": "NO",
         "ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY": "NO",
         "GENERATE_INFOPLIST_FILE": "YES",
+        "INFOPLIST_FILE": "yTunes/Info.plist",
         "INFOPLIST_KEY_NSHumanReadableCopyright": "",
         "LD_RUNPATH_SEARCH_PATHS": [
           "$(inherited)",
@@ -67,6 +106,61 @@
         "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
         "SWIFT_APPROACHABLE_CONCURRENCY": "YES",
         "SWIFT_DEFAULT_ACTOR_ISOLATION": "MainActor",
+        "SWIFT_EMIT_LOC_STRINGS": "YES",
+        "SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY": "YES",
+        "SWIFT_VERSION": "5.0",
+      },
+    }, {
+      "name": "extension",
+      "id": "AA48E02C30AC27DC00344EA5",
+      "product": "Products/extension.appex",
+      "product-type": "app-extension",
+      "build-phases": [
+        "compile-sources",
+        "frameworks",
+        "resources",
+      ],
+      "build-settings": {
+        "AUTOMATION_APPLE_EVENTS": "NO",
+        "CODE_SIGN_ENTITLEMENTS": "extension/extension.entitlements",
+        "CODE_SIGN_STYLE": "Automatic",
+        "CURRENT_PROJECT_VERSION": "1",
+        "DEVELOPMENT_TEAM": "3W48QB4863",
+        "ENABLE_APP_SANDBOX": "YES",
+        "ENABLE_HARDENED_RUNTIME": "NO",
+        "ENABLE_RESOURCE_ACCESS_AUDIO_INPUT": "NO",
+        "ENABLE_RESOURCE_ACCESS_CALENDARS": "NO",
+        "ENABLE_RESOURCE_ACCESS_CAMERA": "NO",
+        "ENABLE_RESOURCE_ACCESS_CONTACTS": "NO",
+        "ENABLE_RESOURCE_ACCESS_LOCATION": "NO",
+        "ENABLE_RESOURCE_ACCESS_PHOTO_LIBRARY": "NO",
+        "GENERATE_INFOPLIST_FILE": "YES",
+        "INFOPLIST_FILE": "extension/Info.plist",
+        "INFOPLIST_KEY_CFBundleDisplayName": "yTunes",
+        "INFOPLIST_KEY_NSHumanReadableCopyright": "",
+        "LD_RUNPATH_SEARCH_PATHS": [
+          "$(inherited)",
+          "@executable_path/../Frameworks",
+          "@executable_path/../../../../Frameworks",
+        ],
+        "MACOSX_DEPLOYMENT_TARGET": "27.2",
+        "MARKETING_VERSION": "1.0",
+        "OTHER_LDFLAGS": [
+          "-framework",
+          "SafariServices",
+        ],
+        "PRODUCT_BUNDLE_IDENTIFIER": "com.rs6apps.yTunes.extension",
+        "PRODUCT_NAME": "$(TARGET_NAME)",
+        "REGISTER_APP_GROUPS": "YES",
+        "RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES": "NO",
+        "RUNTIME_EXCEPTION_ALLOW_JIT": "NO",
+        "RUNTIME_EXCEPTION_ALLOW_UNSIGNED_EXECUTABLE_MEMORY": "NO",
+        "RUNTIME_EXCEPTION_DEBUGGING_TOOL": "NO",
+        "RUNTIME_EXCEPTION_DISABLE_EXECUTABLE_PAGE_PROTECTION": "NO",
+        "RUNTIME_EXCEPTION_DISABLE_LIBRARY_VALIDATION": "NO",
+        "SKIP_INSTALL": "YES",
+        "STRING_CATALOG_GENERATE_SYMBOLS": "YES",
+        "SWIFT_APPROACHABLE_CONCURRENCY": "YES",
         "SWIFT_EMIT_LOC_STRINGS": "YES",
         "SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY": "YES",
         "SWIFT_VERSION": "5.0",

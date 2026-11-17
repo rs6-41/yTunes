@@ -1,97 +1,66 @@
+import SafariServices
 import SwiftUI
 import UniformTypeIdentifiers
 
 struct ContentView: View {
-    @State var path_ytdlp: String = ""
-    @State var path_ffmpeg: String = ""
+    @EnvironmentObject private var model: DownloadModel
     @State private var isImporterPresented = false
-    @AppStorage("selectedURL") private var selectedURL: URL?
-    
-    @State var downloadURL = ""
-    
+
     var body: some View {
-        VStack {
-            VStack(alignment:.leading) {
-                HStack(spacing:3) {
-                    if path_ytdlp != "" {
-                        Image(systemName:"checkmark.circle.fill")
-                            .foregroundStyle(Color.green)
-                    } else {
-                        ProgressView()
-                            .controlSize(.small)
-                    }
-                    Text("ytdlp")
-                }
-                HStack(spacing:3) {
-                    if path_ffmpeg != "" {
-                        Image(systemName:"checkmark.circle.fill")
-                            .foregroundStyle(Color.green)
-                    } else {
-                        ProgressView()
-                            .controlSize(.small)
-                    }
-                    Text("ffmpeg")
-                }
-            }
-            VStack {
-                if path_ytdlp != "" && path_ffmpeg != "" {
-                    TextField("URLを入力", text: $downloadURL)
-                        .textFieldStyle(.roundedBorder)
-                        .autocorrectionDisabled(true)
-                        .frame(width:300)
-                    
-                    HStack {
-                        Button("フォルダを選択") {
-                            isImporterPresented = true
+        VStack(alignment: .leading, spacing: 16) {
+            Button("Safariの拡張機能設定を開く") {
+                SFSafariApplication.showPreferencesForExtension(withIdentifier: "com.rs6apps.yTunes.extension") { error in
+                    if let error {
+                        Task { @MainActor in
+                            model.status = String(localized: "Safariの拡張設定を開けませんでした: \(error.localizedDescription)")
                         }
-                        if let url = selectedURL {
-                            Text("\(url.path)")
-                        }
-                    }
-                    Button(action: {
-                        let tool = URL(fileURLWithPath:path_ytdlp)
-                        let ffmpeg = URL(fileURLWithPath:path_ffmpeg)
-                        if let savePath = selectedURL {
-                            do {
-                                try ytdlp(tool,ffmpeg:ffmpeg,path:savePath,url:downloadURL,options:[""])
-                            } catch {
-                            }
-                        }
-                    }) {
-                        Text("ダウンロード開始")
                     }
                 }
             }
-        }
-        .onAppear() {
-            loadingCommand()
-        }
-        .fileImporter(
-                    isPresented: $isImporterPresented,
-                    allowedContentTypes: [.folder],
-                    allowsMultipleSelection: false
-        ) { result in
-            do {
-                let urls = try result.get()
-                if let url = urls.first {
-                    // 永続的にアクセス権を保持したい場合はブックマーク作成や startAccessingSecurityScopedResource() を行う
-                    _ = url.startAccessingSecurityScopedResource()
-                    selectedURL = url
-                    // 処理が終わったら url.stopAccessingSecurityScopedResource()
+            HStack {
+                Button("フォルダを選択") {
+                    isImporterPresented = true
                 }
-            } catch {
-                print("選択エラー: \(error.localizedDescription)")
+                Text(model.selectedURL?.path ?? String(localized: "保存先未設定"))
+                    .lineLimit(2)
+            }
+            TextField("URLを入力", text: $model.downloadURL)
+                .textFieldStyle(.roundedBorder)
+                .autocorrectionDisabled(true)
+            Button("ダウンロード開始") {
+                model.enqueue(model.downloadURL)
+            }
+            .disabled(!model.isReady || model.downloadURL.isEmpty)
+            HStack {
+                if model.isRunning || !model.isReady {
+                    ProgressView().controlSize(.small)
+                }
+                Text(model.status).textSelection(.enabled)
+            }
+            if !model.isReady {
+                Button("ツールの準備を再試行") {
+                    Task { await model.prepare() }
+                }
+            }
+            if !model.output.isEmpty {
+                ScrollView {
+                    Text(model.output)
+                        .font(.system(.caption, design: .monospaced))
+                        .textSelection(.enabled)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
+                .frame(maxHeight: 240)
             }
         }
-    }
-    func loadingCommand() {
-        Task {
-            do {
-                let tools = try await ToolSetup.ensureInstalled()
-                path_ytdlp = tools.ytDLP.path
-                path_ffmpeg = tools.ffmpeg.path
-            } catch {
-                print(error.localizedDescription)
+        .padding()
+        .frame(minWidth: 480, minHeight: 220)
+        .task { await model.prepare() }
+        .fileImporter(isPresented: $isImporterPresented, allowedContentTypes: [.folder]) { result in
+            switch result {
+            case .success(let url):
+                model.selectFolder(url)
+            case .failure(let error):
+                model.status = error.localizedDescription
             }
         }
     }

@@ -1,0 +1,226 @@
+{
+  "sourceLanguage" : "ja",
+  "strings" : {
+    "%@の実行に失敗しました。\n%@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "%@の実行に失敗しました。\n%@"
+          }
+        }
+      }
+    },
+    "Homebrewの導入を確認できませんでした。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Homebrewの導入を確認できませんでした。"
+          }
+        }
+      }
+    },
+    "HTTP/HTTPSのURLを入力してください。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "HTTP/HTTPSのURLを入力してください。"
+          }
+        }
+      }
+    },
+    "Intel Macでは手動でHomeBrewを導入する必要があります。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intel Macでは手動でHomeBrewを導入する必要があります。"
+          }
+        }
+      }
+    },
+    "Safariの拡張機能設定を開く" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safariの拡張機能設定を開く"
+          }
+        }
+      }
+    },
+    "Safariの拡張設定を開けませんでした: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Safariの拡張設定を開けませんでした: %@"
+          }
+        }
+      }
+    },
+    "URLを入力" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "URLを入力"
+          }
+        }
+      }
+    },
+    "ダウンロードが完了しました。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダウンロードが完了しました。"
+          }
+        }
+      }
+    },
+    "ダウンロードに失敗しました。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダウンロードに失敗しました。"
+          }
+        }
+      }
+    },
+    "ダウンロードに失敗しました（終了コード: %d）。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダウンロードに失敗しました（終了コード: %d）。"
+          }
+        }
+      }
+    },
+    "ダウンロード中: %@" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダウンロード中: %@"
+          }
+        }
+      }
+    },
+    "ダウンロード開始" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ダウンロード開始"
+          }
+        }
+      }
+    },
+    "ツールの準備を再試行" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ツールの準備を再試行"
+          }
+        }
+      }
+    },
+    "ツールを準備しています…" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "ツールを準備しています…"
+          }
+        }
+      }
+    },
+    "フォルダを選択" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "フォルダを選択"
+          }
+        }
+      }
+    },
+    "保存先フォルダを選択してください。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存先フォルダを選択してください。"
+          }
+        }
+      }
+    },
+    "保存先未設定" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "保存先未設定"
+          }
+        }
+      }
+    },
+    "公式インストーラーが見つかりませんでした。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "公式インストーラーが見つかりませんでした。"
+          }
+        }
+      }
+    },
+    "受信したURLが不正です。" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "受信したURLが不正です。"
+          }
+        }
+      }
+    },
+    "準備完了" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "ja" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "準備完了"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
