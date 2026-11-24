@@ -8,7 +8,15 @@
     "development": "ja",
     "supported": [
       "Base",
+      "de",
       "en",
+      "es",
+      "id",
+      "ko",
+      "pt-BR",
+      "ru",
+      "zh-Hans",
+      "zh-Hant",
     ],
   },
   "files": [
@@ -44,6 +52,12 @@
         },
       ],
     }, {
+      "path": "AppIcon.icon",
+      "target-membership": [
+        "yTunes/resources",
+        "extension/resources",
+      ],
+    }, {
       "kind": "group",
       "name": "Products",
       "children": [
@@ -74,6 +88,7 @@
       "build-settings": {
         "ASSETCATALOG_COMPILER_APPICON_NAME": "AppIcon",
         "ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME": "AccentColor",
+        "ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS": "NO",
         "AUTOMATION_APPLE_EVENTS": "NO",
         "CODE_SIGN_ENTITLEMENTS": "yTunes/yTunes.entitlements",
         "CODE_SIGN_STYLE": "Automatic",
