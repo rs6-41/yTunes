@@ -2,13 +2,13 @@
   "fill-specializations" : [
     {
       "value" : {
-        "solid" : "srgb:1.00000,0.14913,0.00000,1.00000"
+        "solid" : "srgb:1.00000,1.00000,1.00000,1.00000"
       }
     },
     {
       "appearance" : "dark",
       "value" : {
-        "solid" : "srgb:1.00000,0.14913,0.00000,1.00000"
+        "solid" : "srgb:1.00000,1.00000,1.00000,1.00000"
       }
     }
   ],
@@ -16,7 +16,9 @@
     {
       "layers" : [
         {
-          "fill" : "none",
+          "fill" : {
+            "solid" : "srgb:1.00000,0.14913,0.00000,1.00000"
+          },
           "glass" : false,
           "image-name" : "Image.heif",
           "name" : "Image",
